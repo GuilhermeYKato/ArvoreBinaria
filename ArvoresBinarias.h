@@ -39,7 +39,11 @@ bool insertItem(PtrTreeTree *node, Object x){
     if((*node)->element.key == x.key){
         return false;
     }
-    if()
+    if((*node)->element.key > x.key){
+        return (insertItem(&(*node)->left,x));
+    } else {
+        return (insertItem(&(*node)->right, x));
+    }
     
 }
 
