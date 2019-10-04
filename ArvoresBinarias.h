@@ -53,24 +53,75 @@ int maxDepth(PtrTreeTree *node);
 
 void destroyTree(PtrTreeTree *node);
 
-void preOrder(PtrTreeTree *node);
+void preOrder(PtrTreeTree *node){
+//    printf("P");
+    if((*node) != NULL){
+        printf("%d ", (*node)->element.key);
+        preOrder(&(*node)->left);
+        preOrder(&(*node)->right);
+    }
+}
 
-void posOrder(PtrTreeTree *node);
+void posOrder(PtrTreeTree *node){
+    if((*node) != NULL){
+        posOrder(&(*node)->left);
+        posOrder(&(*node)->right);
+        printf("%d ", (*node)->element.key);
+    }
+}
 
-void inOrder(PtrTreeTree *node);
+void inOrderCresc(PtrTreeTree *node){
+    if((*node) != NULL){
+        inOrderCresc(&(*node)->left);
+        printf("%d ", (*node)->element.key);
+        inOrderCresc(&(*node)->right);
+    }
 
+}
 
-bool findItem(PtrTreeTree *node, int key, Object *ret);
+void inOrderDecresc(PtrTreeTree *node){
+    if((*node) != NULL){
+        inOrderDecresc(&(*node)->right);
+        printf("%d ", (*node)->element.key);
+        inOrderDecresc(&(*node)->left);
+    }
+}
+
+bool findItemRecur(PtrTreeTree *node, int key){
+    if((*node)== NULL){
+        return false;
+    }
+    if((*node)->element.key == key){
+        return true;
+    }
+    if(key < (*node)->element.key){
+            findItemRecur(&(*node)->left,key);
+    } else {
+        findItemRecur(&(*node)->right,key);
+    }
+}
 
 bool removeItem(PtrTreeTree *node, int key);
 
 PtrTreeTree maximum(PtrTreeTree *node);
 
-PtrTreeTree maximumIterative(PtrTreeTree *node);
+int maximumIterative(PtrTreeTree *node){
+    PtrTreeTree TreeTree = (*node);
+    while(TreeTree->right != NULL){
+        TreeTree = TreeTree->right;
+    }
+    return TreeTree->element.key;
+}
 
 PtrTreeTree minimum(PtrTreeTree *node);
 
-PtrTreeTree minimumIterative(PtrTreeTree *node);
+int minimumIterative(PtrTreeTree *node){
+    PtrTreeTree TreeTree = (*node);
+    while(TreeTree->left != NULL){
+        TreeTree = TreeTree->left;
+    }
+    return TreeTree->element.key;
+}
 
 PtrTreeTree getMinAux (PtrTreeTree *node); //usado na remoção
 
